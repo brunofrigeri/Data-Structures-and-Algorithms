@@ -71,6 +71,18 @@ class LinkedList {
       }
     }
   }
+
+  reverse() {
+    let llist = this.head
+    let prev: LinkedListNode | null = null
+    while (llist !== null) {
+      let next = llist.next
+      llist.next = prev
+      prev = llist
+      llist = next
+    }
+    this.head = prev
+  }
 }
 
 function main() {
@@ -88,6 +100,8 @@ function main() {
   linkedList.printData()
   console.log('\n')
   linkedList.removeNodeByPosition(1)
+  linkedList.printData()
+  linkedList.reverse()
   linkedList.printData()
 }
 
