@@ -38,14 +38,6 @@ class DoublyLinkedList {
     this.tail = node
   }
 
-  print() {
-    let dllist = this.head
-    while (dllist !== null) {
-      console.log(dllist.data)
-      dllist = dllist.next
-    }
-  }
-
   removeFromTail() {
     let dllist = this.head
 
@@ -57,6 +49,8 @@ class DoublyLinkedList {
       }
     }
   }
+
+  removeFromHead() {}
 
   removeByValue() {}
 
@@ -71,9 +65,6 @@ function doublyLinkedListsMain() {
     const node = new DoublyLinkedListNode(arrayOfNumbers[index])
     linkedList.insert(node)
   }
-
-  linkedList.removeFromTail()
-  linkedList.print()
 }
 
 doublyLinkedListsMain()

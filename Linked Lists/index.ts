@@ -34,15 +34,6 @@ class LinkedList {
     this.tail = node
   }
 
-  printData() {
-    let llist = this.head
-
-    while (llist !== null) {
-      console.log(llist.data)
-      llist = llist.next
-    }
-  }
-
   removeNode() {
     let llist = this.head
 
@@ -50,23 +41,6 @@ class LinkedList {
       if (llist?.next?.next === null) {
         llist.next = null
       } else {
-        llist = llist.next
-      }
-    }
-  }
-
-  removeNodeByPosition(position: number) {
-    let llist = this.head
-
-    let index = 0
-    while (llist !== null) {
-      if (index === position - 1) {
-        if (llist.next !== null) {
-          llist.next = llist.next.next
-          return
-        }
-      } else {
-        index++
         llist = llist.next
       }
     }
@@ -94,15 +68,8 @@ function main() {
     linkedList.insert(node)
   }
 
-  linkedList.printData()
-  console.log('\n')
   linkedList.removeNode()
-  linkedList.printData()
-  console.log('\n')
-  linkedList.removeNodeByPosition(1)
-  linkedList.printData()
   linkedList.reverse()
-  linkedList.printData()
 }
 
 main()
