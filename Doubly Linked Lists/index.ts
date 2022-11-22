@@ -4,7 +4,7 @@ interface IDoublyLinkedListNode {
   prev: IDoublyLinkedListNode | null
 }
 
-class DoublyLinkedListNode implements IDoublyLinkedListNode {
+export class DoublyLinkedListNode implements IDoublyLinkedListNode {
   data: number
   next: IDoublyLinkedListNode | null = null
   prev: IDoublyLinkedListNode | null = null
@@ -16,7 +16,7 @@ class DoublyLinkedListNode implements IDoublyLinkedListNode {
   }
 }
 
-class DoublyLinkedList {
+export class DoublyLinkedList {
   head: DoublyLinkedListNode | null
   tail: DoublyLinkedListNode | null
 
@@ -25,7 +25,23 @@ class DoublyLinkedList {
     this.tail = null
   }
 
-  insert(node: DoublyLinkedListNode) {
+  insertToHead(value: number) {
+    const node = new DoublyLinkedListNode(value)
+
+    if (this.head === null) {
+      this.head = node
+    } else {
+      let prev = this.head.prev
+      let next = this.head
+      this.head = node
+      this.head.next = next
+      this.head.prev = prev
+    }
+  }
+
+  insertToTail(value: number) {
+    const node = new DoublyLinkedListNode(value)
+
     if (this.head === null) {
       this.head = node
     } else {
@@ -56,15 +72,3 @@ class DoublyLinkedList {
 
   reverse() {}
 }
-
-function doublyLinkedListsMain() {
-  const arrayOfNumbers = [20, 30, 60]
-
-  let linkedList = new DoublyLinkedList()
-  for (let index = 0; index < arrayOfNumbers.length; index++) {
-    const node = new DoublyLinkedListNode(arrayOfNumbers[index])
-    linkedList.insert(node)
-  }
-}
-
-doublyLinkedListsMain()

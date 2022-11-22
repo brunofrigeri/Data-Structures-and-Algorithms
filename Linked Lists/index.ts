@@ -13,7 +13,7 @@ class LinkedListNode implements ILinkedListNode {
   }
 }
 
-class LinkedList {
+export class LinkedList {
   head: LinkedListNode | null
   tail: LinkedListNode | null
 
@@ -22,7 +22,20 @@ class LinkedList {
     this.tail = null
   }
 
-  insert(node: LinkedListNode) {
+  insertToHead(value: number) {
+    const node = new LinkedListNode(value)
+
+    if (this.head === null) {
+      this.head = node
+    } else {
+      const next = this.head
+      this.head = node
+      this.head.next = next
+    }
+  }
+
+  insertToTail(value: number) {
+    const node = new LinkedListNode(value)
     if (this.head === null) {
       this.head = node
     } else {
@@ -58,18 +71,3 @@ class LinkedList {
     this.head = prev
   }
 }
-
-function main() {
-  const arrayOfNumbers = [20, 30, 60, 40, 33, 78, 63, 120, 108, 97]
-
-  let linkedList = new LinkedList()
-  for (let index = 0; index < arrayOfNumbers.length; index++) {
-    const node = new LinkedListNode(arrayOfNumbers[index])
-    linkedList.insert(node)
-  }
-
-  linkedList.removeNode()
-  linkedList.reverse()
-}
-
-main()
