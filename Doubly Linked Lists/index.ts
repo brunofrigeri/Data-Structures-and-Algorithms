@@ -54,17 +54,7 @@ export class DoublyLinkedList {
     this.tail = node
   }
 
-  removeFromTail() {
-    let dllist = this.head
-
-    while (dllist !== null) {
-      if (dllist?.next?.next === null) {
-        dllist.next = null
-      } else {
-        dllist = dllist.next
-      }
-    }
-  }
+  removeFromTail() {}
 
   removeFromHead() {}
 

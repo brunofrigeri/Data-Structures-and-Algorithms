@@ -13,13 +13,15 @@ class LinkedListNode implements ILinkedListNode {
   }
 }
 
-export class LinkedList {
+export default class LinkedList {
   head: LinkedListNode | null
   tail: LinkedListNode | null
+  length: number
 
   constructor() {
     this.head = null
     this.tail = null
+    this.length = 0
   }
 
   insertToHead(value: number) {
@@ -32,6 +34,7 @@ export class LinkedList {
       this.head = node
       this.head.next = next
     }
+    this.length++
   }
 
   insertToTail(value: number) {
@@ -45,18 +48,24 @@ export class LinkedList {
     }
 
     this.tail = node
+    this.length++
   }
 
   removeNode() {
     let llist = this.head
+    let removedNode = null
 
     while (llist !== null) {
       if (llist?.next?.next === null) {
+        removedNode = llist.next
         llist.next = null
-      } else {
-        llist = llist.next
       }
+
+      llist = llist.next
     }
+
+    this.length--
+    return removedNode
   }
 
   reverse() {
