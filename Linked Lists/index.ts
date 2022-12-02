@@ -15,12 +15,10 @@ class LinkedListNode implements ILinkedListNode {
 
 export default class LinkedList {
   head: LinkedListNode | null
-  tail: LinkedListNode | null
   length: number
 
   constructor() {
     this.head = null
-    this.tail = null
     this.length = 0
   }
 
@@ -39,31 +37,41 @@ export default class LinkedList {
 
   insertToTail(value: number) {
     const node = new LinkedListNode(value)
+
     if (this.head === null) {
       this.head = node
     } else {
-      if (this.tail) {
-        this.tail.next = node
+      let llist = this.head
+      while (llist !== null) {
+        if (llist?.next === null) {
+          llist.next = node
+          break
+        } else {
+          llist = llist?.next
+        }
       }
     }
 
-    this.tail = node
     this.length++
   }
 
   removeNode() {
-    let llist = this.head
     let removedNode = null
 
-    while (llist !== null) {
-      if (llist?.next?.next === null) {
-        removedNode = llist.next
-        llist.next = null
+    if (this.head?.next === null) {
+      removedNode = this.head
+      this.head = null
+    } else {
+      let llist = this.head
+      while (llist !== null) {
+        if (llist?.next === null) {
+          removedNode = llist
+          llist.next = null
+        }
+
+        llist = llist.next
       }
-
-      llist = llist.next
     }
-
     this.length--
     return removedNode
   }
