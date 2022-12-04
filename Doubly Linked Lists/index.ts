@@ -100,5 +100,22 @@ export default class DoublyLinkedList {
     return removedNode
   }
 
-  reverse() {}
+  reverse() {
+    if (this.head?.next === null) {
+    } else {
+      let dllist = this.head
+      let reversedList = null
+
+      while (dllist !== null) {
+        let next = dllist.next
+        let prev = dllist.prev
+        dllist.next = prev
+        dllist.prev = next
+        reversedList = dllist
+        dllist = next
+      }
+
+      this.head = reversedList
+    }
+  }
 }

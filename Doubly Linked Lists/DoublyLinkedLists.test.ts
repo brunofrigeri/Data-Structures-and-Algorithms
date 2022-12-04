@@ -104,4 +104,25 @@ describe('Doubly Linked Lists', () => {
       })
     })
   })
+
+  describe('should be able to reverse', () => {
+    let linkedList = new DoublyLinkedList()
+    it('with one item', () => {
+      linkedList.insertToTail(10)
+      linkedList.reverse()
+      expect(linkedList.head?.data).toBe(10)
+    })
+    it('with two items', () => {
+      linkedList.insertToTail(20)
+      linkedList.reverse()
+      expect(linkedList.head?.data).toBe(20)
+    })
+    it('with three or more items', () => {
+      linkedList.insertToTail(30)
+      linkedList.insertToTail(40)
+      linkedList.insertToTail(50)
+      linkedList.reverse()
+      expect(linkedList.head?.data).toBe(50)
+    })
+  })
 })
