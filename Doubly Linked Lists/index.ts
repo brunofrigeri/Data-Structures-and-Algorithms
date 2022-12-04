@@ -4,7 +4,7 @@ interface IDoublyLinkedListNode {
   prev: IDoublyLinkedListNode | null
 }
 
-export class DoublyLinkedListNode implements IDoublyLinkedListNode {
+class DoublyLinkedListNode implements IDoublyLinkedListNode {
   data: number
   next: IDoublyLinkedListNode | null = null
   prev: IDoublyLinkedListNode | null = null
@@ -16,13 +16,13 @@ export class DoublyLinkedListNode implements IDoublyLinkedListNode {
   }
 }
 
-export class DoublyLinkedList {
+export default class DoublyLinkedList {
   head: DoublyLinkedListNode | null
-  tail: DoublyLinkedListNode | null
+  length: number
 
   constructor() {
     this.head = null
-    this.tail = null
+    this.length = 0
   }
 
   insertToHead(value: number) {
@@ -31,12 +31,13 @@ export class DoublyLinkedList {
     if (this.head === null) {
       this.head = node
     } else {
-      let prev = this.head.prev
       let next = this.head
       this.head = node
       this.head.next = next
-      this.head.prev = prev
+      this.head.prev = null
     }
+
+    this.length++
   }
 
   insertToTail(value: number) {
@@ -45,20 +46,51 @@ export class DoublyLinkedList {
     if (this.head === null) {
       this.head = node
     } else {
-      if (this.tail) {
-        this.tail.next = node
-        this.tail.next.prev = this.tail
+      let doublyLinkedList = this.head
+
+      while (doublyLinkedList !== null) {
+        if (doublyLinkedList?.next === null) {
+          let prev = doublyLinkedList
+          doublyLinkedList.next = node
+          doublyLinkedList.next.prev = prev
+          break
+        } else {
+          doublyLinkedList = doublyLinkedList.next
+        }
       }
     }
 
-    this.tail = node
+    this.length++
   }
 
-  removeFromTail() {}
+  removeFromHead() {
+    let removedNode = null
 
-  removeFromHead() {}
+    if (this.head !== null) {
+      removedNode = this.head.data
+      this.head = this.head?.next
+    }
 
-  removeByValue() {}
+    this.length--
+    return removedNode
+  }
+
+  removeFromTail() {
+    let dllist = this.head
+    let removedNode = null
+
+    while (dllist !== null) {
+      if (dllist?.next === null) {
+        removedNode = dllist.data
+        dllist = null
+      } else {
+        dllist = dllist?.next
+      }
+    }
+
+    this.length--
+    return removedNode
+  }
 
   reverse() {}
 }
