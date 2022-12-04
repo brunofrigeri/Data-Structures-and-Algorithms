@@ -67,8 +67,11 @@ export default class DoublyLinkedList {
     let removedNode = null
 
     if (this.head !== null) {
-      removedNode = this.head.data
-      this.head = this.head?.next
+      removedNode = this.head
+      let next = this.head.next
+      this.head = next
+
+      if (this.head?.prev) this.head.prev = null
     }
 
     this.length--
@@ -76,15 +79,20 @@ export default class DoublyLinkedList {
   }
 
   removeFromTail() {
-    let dllist = this.head
     let removedNode = null
 
-    while (dllist !== null) {
-      if (dllist?.next === null) {
-        removedNode = dllist.data
-        dllist = null
-      } else {
-        dllist = dllist?.next
+    if (this.head?.next === null) {
+      removedNode = this.head
+      this.head = null
+    } else {
+      let dllist = this.head
+      while (dllist !== null) {
+        if (dllist?.next === null) {
+          removedNode = dllist
+          dllist = null
+        } else {
+          dllist = dllist?.next
+        }
       }
     }
 
