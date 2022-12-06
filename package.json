@@ -17,6 +17,7 @@
     "typescript": "^4.9.3"
   },
   "scripts": {
-    "test": "jest"
+    "test:ll": "yarn jest 'Linked Lists'/LinkedLists.test.ts",
+    "test:dll": "yarn jest 'Doubly Linked Lists'/DoublyLinkedLists.test.ts"
   }
 }
